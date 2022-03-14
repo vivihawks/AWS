@@ -4,4 +4,6 @@ RUN mkdir -p /usr/local/regsvc-be
 ADD @project.build.finalName@.jar /usr/local/regsvc-be/
 ADD run.sh run.sh
 RUN chmod +x run.sh
+#Ensuring the run.sh is in UNIX encoding. Otherwise run.sh will not be executed by Docker
+RUN sed -i 's/\r$//' run.sh  &&  chmod +x run.sh
 CMD ./run.sh
