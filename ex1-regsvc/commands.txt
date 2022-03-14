@@ -1,0 +1,23 @@
+1. Start Docker Desktop
+2. Obtain AWS Access Key and Secret Key
+3. To launch the application locally execute the following commands
+	maven clean package docker:build
+	docker run -d -p 8080:8080 cognizant/regsvc:baseVersion
+4. To launch the application on AWS Execute the following commands
+	aws configure
+	aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 022932606714.dkr.ecr.us-east-2.amazonaws.com
+	aws ecr create-repository --repository-name regsvc-be --image-scanning-configuration scanOnPush=true --image-tag-mutability IMMUTABLE --region us-east-2
+	docker tag cognizant/regsvc:baseVersion 022932606714.dkr.ecr.us-east-2.amazonaws.com/regsvc-be:baseVersion
+	docker push 022932606714.dkr.ecr.us-east-2.amazonaws.com/regsvc-be:baseVersion
+5. Security Group of the EC2  Instance of Fargate has to open port 8080
+
+
+Monolithic Deployment
+Microservice Deployment
+FrontEnd – S3 (with or without CloudFront)
+Backend Options – One of the following
+ECS
+EKS
+ElasticBeanStalk
+EC2
+Angular Server Side Rendering
