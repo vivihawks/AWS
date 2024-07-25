@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
+import { User } from './user';
 @Injectable({
   providedIn: 'root'
 })
@@ -11,11 +11,9 @@ export class UserRegistationService {
   constructor(private http:HttpClient) { }
 
 	baseUrl:string = "http://localhost:8080/";
-	//baseUrl:string = "http://3.12.153.34:8080/";
 //	baseUrl:string = "http://18.191.192.57:8080/"
 	
-  public doRegistration(user){
-
+  public doRegistration(user:User){
     return this.http.post(`${this.baseUrl}register`,user,{responseType:'text' as 'json'});
   }
 
@@ -23,11 +21,11 @@ export class UserRegistationService {
     return this.http.get(`${this.baseUrl}getAllUsers`);
   }
 
-  public getUserByEmail(email){
+  public getUserByEmail(email:string){
     return this.http.get(`${this.baseUrl}findUser/${email}`);
   }
 
-  public deleteUser(id){
+  public deleteUser(id:number){
     return this.http.delete(`${this.baseUrl}cancel/${id}`);
   }
 }

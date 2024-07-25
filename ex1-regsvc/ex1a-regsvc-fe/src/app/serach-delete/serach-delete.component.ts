@@ -9,7 +9,7 @@ import { UserRegistationService } from '../user-registation.service';
 export class SerachDeleteComponent implements OnInit {
 
   users:any;
-  email:string;
+  email!:string;
   
   constructor(private service:UserRegistationService) { }
 
@@ -25,8 +25,12 @@ public findUserByEmailId(){
  }
 
   ngOnInit() {
-    let resp=this.service.getUsers();
-    resp.subscribe((data)=>this.users=data);
+    this
+      .service
+      .getUsers()
+      .subscribe(
+        (data)=>this.users=data
+      );
   }
 
 }

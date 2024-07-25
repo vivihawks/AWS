@@ -10,19 +10,22 @@ import { UserRegistationService } from '../user-registation.service';
 export class RegistrationComponent implements OnInit {
 
 
-  user: User=new User("","",0,"");
-  message:any;
+  user: User = new User("", "", 0, "");
+  message: any;
 
-  constructor(private service:UserRegistationService) { }
+  constructor(private service: UserRegistationService) { }
 
   ngOnInit() {
   }
-  
 
-  public registerNow(){
-    
-let resp=this.service.doRegistration(this.user);
-resp.subscribe((data)=>this.message=data);
+
+  public registerNow() {
+    this
+      .service
+      .doRegistration(this.user)
+      .subscribe(
+        (data) => this.message = data
+      );
   }
 
 }
